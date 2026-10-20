@@ -260,19 +260,13 @@ export default function App() {
           {/* Left Side: Photo */}
           <div className="hidden w-full sm:w-auto flex-shrink-0 flex justify-center lg:justify-start lg:sticky lg:top-24 self-start">
             <div className="relative w-64 sm:w-80 md:w-88 aspect-[3/4] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] border border-black/[0.08] dark:border-white/10 transition-colors duration-500 ease-in-out">
-              <img
-                src="/assets/aistudio/Official_DP_a96b963f.JPG"
-                alt="Patrick Nicos So — Official DP.jpg"
-                className="w-full h-full object-cover object-top"
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (!target.src.includes('Official%20DP.jpg')) {
-                    target.src = '/Official DP.jpg';
-                  }
-                }}
-              />
+             <img
+  src="/Official%20DP.JPG"
+  alt="Patrick Nicos So, Official DP"
+  className="w-full h-full object-cover object-top"
+  loading="lazy"
+  decoding="async"
+/>
             </div>
           </div>
 

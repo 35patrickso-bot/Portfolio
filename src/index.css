@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", -apple-system-body, system-ui, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+html.dark {
+  background-color: #121212;
+  color: #f4f4f5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Loading Screen Overlay Wrapper */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f4f1;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark #loader-wrapper {
+  background-color: #121212;
+}
+
+/* Exact CSS for loader element */
+.loader {
+  width: 120px;
+  height: 20px;
+  -webkit-mask: radial-gradient(circle closest-side,#000 94%,#0000) left/20% 100%;
+  mask: radial-gradient(circle closest-side,#000 94%,#0000) left/20% 100%;
+  background: linear-gradient(#000 0 0) left/0% 100% no-repeat #ddd;
+  animation: l17 2s infinite steps(6);
+}
+
+.dark .loader {
+  background: linear-gradient(#fff 0 0) left/0% 100% no-repeat #333;
+}
+
+@keyframes l17 {
+  100% {background-size:120% 100%}
+}
+
+/* 
+  Scroll Animations (Fade & Slide Up)
+*/
+.hidden {
+  display: revert !important;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hidden.flex {
+  display: flex !important;
+}
+
+.hidden.grid {
+  display: grid !important;
+}
+
+.hidden.inline-block {
+  display: inline-block !important;
+}
+
+.hidden.inline-flex {
+  display: inline-flex !important;
+}
+
+.hidden.show,
+.show {
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* Cascading stagger transition delays */
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+/* 
+  Services Grid Card Hover Effect
+*/
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.service-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05), 0 20px 32px -8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark .service-card:hover {
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 
+  Infinite Tool Marquee Keyframes & Tracks
+*/
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track-left {
+  display: flex;
+  width: max-content;
+  gap: 0.875rem;
+  padding: 0.5rem 0;
+  animation: marquee-scroll-left 34s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-right {
+  display: flex;
+  width: max-content;
+  gap: 0.875rem;
+  padding: 0.5rem 0;
+  animation: marquee-scroll-right 34s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-left:hover,
+.marquee-track-right:hover {
+  animation-play-state: paused;
+}
+
+.marquee-gradient-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* iOS Liquid Glass Effect (Light Mode & Dark Mode) */
+.liquid-glass-nav {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 16px 36px -10px rgba(0, 0, 0, 0.07),
+    0 4px 12px -2px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.02),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.02);
+  transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.dark .liquid-glass-nav {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 16px 36px -10px rgba(0, 0, 0, 0.7),
+    0 4px 12px -2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Active Liquid Glass Pill Lens */
+.liquid-glass-active-pill {
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 2px 8px -1px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.04);
+}
+
+.dark .liquid-glass-active-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 2px 8px -1px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Specular reflection reminiscent of liquid glass magnifier */
+.liquid-lens-reflection {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0) 65%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+}
+
+.dark .liquid-lens-reflection {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0) 65%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
